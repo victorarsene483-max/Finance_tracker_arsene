@@ -67,15 +67,6 @@ export default function Sidebar({ onAddTransaction }) {
           </div>
           <p> Arsene Victor</p>
           <p>victorarsene483@email.com</p>
-          <button
-            className="logout-btn"
-            onClick={() => {
-              localStorage.removeItem("fintrack_current_user");
-              window.location.reload();
-            }}
-          >
-            Logout
-          </button>
         </div>
       </div>
     </>
