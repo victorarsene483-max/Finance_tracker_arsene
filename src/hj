@@ -1,0 +1,63 @@
+import { Wallet, TrendingUp, TrendingDown, PieChart } from "lucide-react";
+
+const SUMMARY_DATA = [
+  {
+    label: "Total Balance",
+    value: "KSh 42,850",
+    change: "8.4%",
+    trend: "up",
+    icon: Wallet,
+    variant: "balance",
+  },
+  {
+    label: "Total Income",
+    value: "KSh 65,000",
+    change: "12.6%",
+    trend: "up",
+    icon: TrendingUp,
+    variant: "income",
+  },
+  {
+    label: "Total Expenses",
+    value: "KSh 22,150",
+    change: "3.7%",
+    trend: "down",
+    icon: TrendingDown,
+    variant: "expenses",
+  },
+  {
+    label: "Savings",
+    value: "KSh 42,850",
+    change: "18.9%",
+    trend: "up",
+    icon: PieChart,
+    variant: "savings",
+  },
+];
+
+function SummaryCard(){
+    return(<>
+    <div className="summary-cards">
+        {SUMMARY_DATA.map(({ label, value, change, trend, icon: Icon, variant }) => (
+
+        <div className="summary-card" key={label}>
+            <span className={`card-icon ${variant}-icon`}>
+                <Icon size={20}/>
+            </span>
+            <div className="card-body">
+                <p className="card-label">{label}</p>
+                <p className="card-value">{value}</p>
+                <p className={`card-change ${trend}`}>
+                    {trend === "up" ? "↑" : "↓"} {change} vs last month
+                </p>
+
+            </div>
+        </div>
+        ))}
+
+    </div>
+        </>
+
+    )
+}
+export default SummaryCard
