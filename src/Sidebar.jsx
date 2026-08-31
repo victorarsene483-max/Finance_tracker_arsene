@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import ProfilePic from "./assets/profile.jpg";
-const NavItems=[
+
+const NAV_ITEMS = [
   "Dashboard",
   "Transactions",
   "Analytics",
@@ -12,13 +13,14 @@ const NavItems=[
   "Settings",
 ];
 
-export default function Sidebar({ onAddTransaction }) {
+export default function Sidebar({ onAddTransaction, activeView, onNavigate }) {
   const [isOpen, setIsOpen] = useState(false);
 
   function closeDrawer() {
     setIsOpen(false);
   }
-  function handleNavClick(view){
+
+  function handleNavClick(view) {
     onNavigate(view);
     closeDrawer();
   }
@@ -50,10 +52,12 @@ export default function Sidebar({ onAddTransaction }) {
         </div>
 
         <ul>
-          {NavItems.map((item)=>(
+          {NAV_ITEMS.map((item) => (
             <li
-            key={item}
-            className={activeView===item?"active-nav-item":""} onClick={()=>handleNavClick(item)}>
+              key={item}
+              className={activeView === item ? "active-nav-item" : ""}
+              onClick={() => handleNavClick(item)}
+            >
               {item}
             </li>
           ))}
@@ -80,6 +84,15 @@ export default function Sidebar({ onAddTransaction }) {
           </div>
           <p> Arsene Victor</p>
           <p>victorarsene483@email.com</p>
+          <button
+            className="logout-btn"
+            onClick={() => {
+              localStorage.removeItem("fintrack_current_user");
+              window.location.reload();
+            }}
+          >
+            Logout
+          </button>
         </div>
       </div>
     </>
