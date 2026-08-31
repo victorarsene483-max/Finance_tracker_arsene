@@ -1,12 +1,26 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import ProfilePic from "./assets/profile.jpg";
+const NavItems=[
+  "Dashboard",
+  "Transactions",
+  "Analytics",
+  "Budgets",
+  "Categories",
+  "Goals",
+  "Reports",
+  "Settings",
+];
 
 export default function Sidebar({ onAddTransaction }) {
   const [isOpen, setIsOpen] = useState(false);
 
   function closeDrawer() {
     setIsOpen(false);
+  }
+  function handleNavClick(view){
+    onNavigate(view);
+    closeDrawer();
   }
 
   return (
@@ -36,14 +50,13 @@ export default function Sidebar({ onAddTransaction }) {
         </div>
 
         <ul>
-          <li>Dashboard</li>
-          <li>Transactions</li>
-          <li>Analytics</li>
-          <li>Budgets</li>
-          <li>Categories</li>
-          <li>Goals</li>
-          <li>Reports</li>
-          <li>Settings</li>
+          {NavItems.map((item)=>(
+            <li
+            key={item}
+            className={activeView===item?"active-nav-item":""} onClick={()=>handleNavClick(item)}>
+              {item}
+            </li>
+          ))}
         </ul>
 
         <div className="promo">

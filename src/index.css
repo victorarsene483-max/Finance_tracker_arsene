@@ -477,3 +477,26 @@ ul li:first-child {
     padding: 0 16px 20px !important;
   }
 }
+ul li.active-nav-item {
+  background-color: var(--sidebar-bg-active);
+  color: var(--sidebar-text);
+}
+
+.single-view {
+  padding: 0 32px 24px;
+}
+
+.single-view.coming-soon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+@media (max-width: 640px) {
+  .single-view {
+    padding: 0 16px 20px;
+  }
+}
