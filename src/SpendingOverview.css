@@ -58,3 +58,23 @@
   font-weight: 700;
   color: #ffffff;
 }
+@media (max-width: 640px) {
+  .spending-overview {
+    padding: 16px;
+    overflow: hidden;
+  }
+
+  .spending-header {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .spending-header h2 {
+    font-size: 15px;
+  }
+
+  .range-select {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+}
