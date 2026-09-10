@@ -1,34 +1,77 @@
-import {useState} from "react";
-function Login(){
-    const[email,setEmail]=useState("");
-    const[password,setPassword]=useState("");
-    const[error,setError]=useState("");
+import { useState } from "react";
+import "./index.css"
+function LoginForm({ onLogin }) {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
-function handleLogin(){
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (!name.trim()) {
+      setError("Enter your name to continue.");
+      return;
+    }
+
     setError("");
-    if(!email || !password){
-        setError("please enter both email and password,");
-        return;
-    }
-    const users = JSON.parse(localStorage.getItem("fintrack_users")) || [];
-    const matchedUser = users.find(
-      (user) => user.email === email.trim().toLowerCase() && user.password === password
-    );
-    if(!matchedUser){
-        setError("Incorrect email or password");
-        return;
-    }
-    localStorage.setItem("fintrack_current_user", JSON.stringify(matchedUser));
-    console.log("Logged in as:", matchedUser.fullName);
-}
-<div className="login-card">
-    <div>
-        <h1 className="login-header">Login</h1>
-    </div>
-    {error && <p className="login-error">{error}</p>}
-    <input type="password" placeholder="Enter your password"  value={password} onChange={(e)=>setPassword(e.target.value)}/>
-    <button onClick={handleLogin}>Login</button>
+    onLogin({ name: name.trim(), email: email.trim() });
+  };
 
-</div>
+  return (
+    <div className="login-page">
+      <form className="login-form" onSubmit={handleSubmit}>
+        <div className="login-brand">
+          <span className="login-brand-rent">Fin</span>
+          <span className="login-brand-flow">Track</span>
+        </div>
+
+        <h1 className="login-title">Log in to your account</h1>
+        <p className="login-subtitle">
+          Enter your details to access your dashboard.
+        </p>
+
+        <label className="login-field">
+          <span className="login-label">Full name</span>
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Your Name"
+            className="login-input"
+          />
+        </label>
+
+        <label className="login-field">
+          <span className="login-label">Email</span>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="yourname@.gmail.com"
+            className="login-input"
+          />
+        </label>
+
+        <label className="login-field">
+          <span className="login-label">Password</span>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="••••••••"
+            className="login-input"
+          />
+        </label>
+
+        {error && <p className="login-error">{error}</p>}
+
+        <button type="submit" className="login-submit">
+          Log in
+        </button>
+      </form>
+    </div>
+  );
 }
-export default Login
+
+export default LoginForm;

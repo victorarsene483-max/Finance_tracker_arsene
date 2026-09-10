@@ -8,13 +8,20 @@ import Expenses from "./Expenses.jsx";
 import BudgetCard from "./BudgetCard.jsx";
 import RecentTransactions from "./RecentTransactions.jsx";
 import AddTransactionModal from "./AddTransactionModal.jsx";
+import Login from "./Login.jsx"
 import "./App.css";
 
 function AppContent() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [activeView, setActiveView] = useState("Dashboard");
+  const[user,setUser]=useState(null);
+
+    if (!user) {
+      return <Login onLogin={setUser} />;
+    }
 
   return (
+
     <div className="app-layout">
       <Sidebar
         onAddTransaction={() => setIsModalOpen(true)}
